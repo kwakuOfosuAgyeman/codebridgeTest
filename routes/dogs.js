@@ -9,6 +9,7 @@ router.get('/', async (req, res) => {
   const sortingOrder = order === 'desc' ? 'DESC' : 'ASC';
   const offset = (pageNumber - 1) * limit || 0;
 
+
   try {
     const dogs = await Dog.findAll({
       order: [[sortingAttribute, sortingOrder]],

@@ -4,7 +4,9 @@ const Dog = require('../models/dog');
 
 
 router.post('/', async (req, res) => {
+
     const { name, color, tail_length, weight } = req.body;
+    console.log(req.body);
   
     try {
       const dog = await Dog.create({ name, color, tail_length, weight });

@@ -3,27 +3,45 @@ const sequelize = require('../config/database');
 require('dotenv').config();
 
 
-const Dog = sequelize.define('dog', {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  color: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  tail_length: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    validate: {
-      min: 0,
+module.exports = {
+    up: (queryInterface, Sequelize) => {
+      return queryInterface.createTable('dogs', {
+        id: {
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          type: Sequelize.INTEGER
+        },
+        name: {
+          type: Sequelize.STRING,
+          allowNull: false,
+          unique: true // Add unique constraint
+        },
+        color: {
+          type: Sequelize.STRING,
+          allowNull: false
+        },
+        tail_length: {
+          type: Sequelize.INTEGER,
+          allowNull: false
+        },
+        weight: {
+          type: Sequelize.INTEGER,
+          allowNull: false
+        },
+        createdAt: {
+          allowNull: false,
+          type: Sequelize.DATE
+        },
+        updatedAt: {
+          allowNull: false,
+          type: Sequelize.DATE
+        }
+      });
     },
-  },
-  weight: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-});
-
-module.exports = Dog;
+  
+    down: (queryInterface, Sequelize) => {
+      return queryInterface.dropTable('dogs');
+    }
+  };
+  

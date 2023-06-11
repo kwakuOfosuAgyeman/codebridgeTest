@@ -2,10 +2,13 @@ const express = require('express');
 const pingRouter = require('./routes/ping');
 const dogsRouter = require('./routes/dogs');
 const dogRouter = require('./routes/dog');
+const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/ping', pingRouter);
 app.use('/dogs', dogsRouter);
